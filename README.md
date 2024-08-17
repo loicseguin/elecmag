@@ -14,9 +14,7 @@ manuel.
 ## Licence
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-  <a property="dct:title" rel="cc:attributionURL" href="https://github.com/loicseguin/elecmag">
-    Cet ouvrage
-  </a> par <span property="cc:attributionName">Loïc Séguin-Charbonneau</span>
+  Cet ouvrage par <span property="cc:attributionName">Loïc Séguin-Charbonneau</span>
   est distribué sous une licence
   <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
      target="_blank" rel="license noopener noreferrer"
@@ -24,14 +22,11 @@ manuel.
     CC BY-NC-SA 4.0
     <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
          src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-         alt="">
-    <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
+         alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
          src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-         alt="">
-    <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
+         alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
          src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
-         alt="">
-    <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
+         alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
          src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
          alt="">
   </a>
