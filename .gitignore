@@ -1,7 +1,9 @@
 .DS_Store
 *.aux
 *.log
-*.pdf
 *.log
 *.fdb_latexmk
 *.fls
+*.bbl
+*.blg
+*.out
