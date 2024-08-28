@@ -1,0 +1,219 @@
+\documentclass[nofonts]{tufte-handout}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage{booktabs}
+\usepackage[locale=FR]{siunitx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{positioning, calc}
+
+\usepackage{fontspec}
+\usepackage{ifluatex}
+\setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
+\setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
+\setmonofont[Renderer=Basic]{TeX Gyre Cursor}
+\ifluatex
+  \newcommand{\textls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
+
+\geometry{
+  left=1.5cm,
+  top=2cm,
+  textwidth=30pc,
+  bottom=1.5cm,
+}
+
+\sisetup{
+  mode=text,
+  reset-text-family=false,
+  reset-text-series=false,
+  per-mode=symbol,
+}
+
+\newcommand{\F}{\boldsymbol{\vec{F}}}
+\newcommand{\vv}{\boldsymbol{\vec{v}}}
+\newcommand{\va}{\boldsymbol{\vec{a}}}
+
+
+\title{Grille de correction des problèmes}
+\author{Loïc Séguin-Charbonneau}
+\date{203-NYB-05, Automne 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Critères de correction et indicateurs}
+
+\begin{fullwidth}
+Les problèmes (problèmes intégrateurs et problèmes dans les examens) seront
+corrigés selon les quatre critères dans le tableau ci-dessous. Pour chacun des
+  critères, le tableau montre les critères de perfomance ministériels (CPM)
+correspondant de même que des indicateurs qui attestent de la satisfaction du
+critère.
+Pour rappel, les critères de performance ministériels sont les suivants:
+\begin{enumerate}[label=\alph*.]
+  \item utilisation appropriée des concepts, des principes et des lois de l’électricité et du magnétisme;
+  \item schématisation adéquate des situations physiques;
+  \item représentations graphiques adaptées à la nature des phénomènes;
+  \item justification des étapes retenues pour l’analyse des situations;
+  \item application rigoureuse des concepts, les principes et les lois de l’électricité et du magnétisme;
+  \item jugement critique des résultats;
+  \item interprétation des limites des modèles;
+\end{enumerate}
+
+\vspace{\baselineskip}
+La correction d'un critère est conditionnelle à la maîtrise des critères
+précédents. Par exemple, la résolution mathématique d'un étudiant qui ne
+réussit pas à trouver un principe de résolution judicieux ne sera pas
+corrigée.
+
+
+\vspace{\baselineskip}
+
+\noindent\begin{tabular}{p{3cm}p{1cm}p{13cm}}
+  \toprule
+  Critère  &  CPM  &  Indicateurs   \\
+  \midrule
+  Schématisation juste
+    &  b
+    &  Effectuer un schéma de principe utile et clair qui
+       \begin{itemize}
+         \item présente les paramètres de la situation (forces, champs, dimensions, etc.);
+         \item inclut les systèmes de coordonnées appropriés;
+         \item présente les éléments relatifs à l'évolution de la situation (conditions initiales, finales, intermédiaires).
+       \end{itemize}
+       \\\midrule
+  Principe de résolution judicieux et explicite
+    & a, d, f, g
+    & \vspace{-\baselineskip}\begin{itemize}
+        \item Présenter les grandes lignes de la résolution en un enchaînement logique et clair
+        \item Associer la situation aux lois et principes appropriés
+        \item Justifier chaque étape de la résolution par des lois, principes
+          phyiques, règles mathématiques ou raisonnements logiques appropriés et
+          justes
+        \item Noter les contraintes et limites applicables à la situation
+        \item Relever des résultats impossibles ou aberrants
+      \end{itemize}
+      \\\midrule
+  Résolution mathématique exacte
+    &  e, c
+    & \vspace{-\baselineskip}\begin{itemize}
+        \item Associer avec justesse les variables aux quantités
+        \item Présenter une démarche explicite, complète et claire
+        \item Obtenir les résultats exacts.
+        \item Illustrer le comportement des variables par un graphique exact
+      \end{itemize}  \\\midrule
+  Respect des normes et conventions
+    &  e
+    & \vspace{-\baselineskip}\begin{itemize}
+        \item Respecter la syntaxe mathématique (e.x.: la notation scalaire/vectorielle)
+        \item Effectuer une analyse dimensionnelle pour s'assurer de la cohérence des unités
+      \end{itemize}  \\
+  \bottomrule
+\end{tabular}
+\end{fullwidth}
+
+\section{Rubrique d'évaluation}
+
+Chaque critère sera évalué sur une échelle à quatre niveaux : \textbf{E}xcellent,
+\textbf{S}atisfaisant, en p\textbf{R}ogression,
+\textbf{F}ragmentaire\cite{stutzman2004emrf}. La signification de chaque niveau
+est décrite dans la figure ci-dessous.
+
+\begin{figure*}
+\begin{tikzpicture}[
+    node distance=8mm and 0mm,
+    outer sep=4pt,
+    box/.style={
+      rectangle,
+      very thick,
+      draw=black!50,
+      text width=4cm,
+      align=center
+    },
+    terminal/.style={
+      rectangle,
+      rounded corners=3mm,
+      very thick,
+      draw=black!50,
+      fill=black!8,
+      text width=3.6cm,
+      align=center
+    },
+    >=stealth
+  ]
+  \node (top) [box] {
+    Est-ce que le travail démontre une compréhension des concepts et
+    répond aux attentes?
+  };
+  \node (complet) [box, below left=of top] {Est-il complet et bien communiqué?};
+  \node (partiel) [box, below right=of top] {Y a-t-il des signes d'une compréhension partielle?};
+  \node (excellent) [terminal, below left=of complet, xshift=2cm] {
+    \textbf{Excellent}. Satisfait ou dépasse toutes les attentes. La communication est
+    claire et complète. La maîtrise des concepts est évidente. Aucune erreur
+    non triviale n'est présente.
+  };
+  \node (sat) [terminal, below right=of complet, xshift=-2cm] {
+    \textbf{Satisfaisant}. Les attentes sont atteintes et la compréhension est évidente.
+    Quelques révisions ou améliorations sont requises, mais aucune erreur
+    significative n'est présente. Aucun enseignement supplémentaire n'est requis.
+  };
+  \node (prog) [terminal, below left=of partiel, xshift=2cm] {
+    \textbf{En progression}. Une compréhension partielle est évidente,
+    mais des lacunes importantes demeurent. Requiert plus de travail, une
+    révision importante ou des explications améliorées.
+  };
+  \node (frag) [terminal, below right=of partiel, xshift=-2cm] {
+    \textbf{Fragmentaire}. Trop peu d'information est présente pour pouvoir évaluer
+    adéquatement si les concepts sont compris. Le travail contient des
+    omissions importantes ou il y a trop de problèmes pour porter un jugement
+    global.
+  };
+  \draw[->] (top.south) -- ++(0, -0.4) -| node[left, xshift=-5pt] {oui} (complet.north);
+  \draw[->] (top.south) -- ++(0, -0.4) -| node[right, xshift=5pt] {non} (partiel.north);
+  \draw[->] (complet.south) -- ++(0, -0.4) -| node[left, xshift=-5pt] {oui} (excellent.north);
+  \draw[->] (complet.south) -- ++(0, -0.4) -| node[right, xshift=5pt] {non} (sat.north);
+  \draw[->] (partiel.south) -- ++(0, -0.4) -| node[left, xshift=-5pt] {oui} (prog.north);
+  \draw[->] (partiel.south) -- ++(0, -0.4) -| node[right, xshift=5pt] {non} (frag.north);
+  \draw[densely dashed] ($(top) + (0, -2.5)$) -- ++(0, -7.5) node[below] {seuil};
+\end{tikzpicture}
+\end{figure*}
+
+\section{Grille de correction}
+
+\begin{tabular}{ll}
+  \toprule
+  Critère  &  Niveau  \\
+  \midrule
+  Schématisation juste  &  E\quad\quad S\quad\quad R\quad\quad F\quad\quad \\
+  Principe de résolution judicieux et explicite  &  E\quad\quad S\quad\quad R\quad\quad F\quad\quad \\
+  Résolution mathématique exacte  &  E\quad\quad S\quad\quad R\quad\quad F\quad\quad \\
+  Respect des normes et conventions  &  E\quad\quad S\quad\quad R\quad\quad F\quad\quad \\
+  \bottomrule
+\end{tabular}
+
+\vspace{\baselineskip}
+Pour produire une note chiffrée à partir de la grille, une moyenne pondérée est
+effectuée de la façon suivante. La pondération respective de chaque critère est
+de \qty{20}{\percent}, \qty{30}{\percent}, \qty{30}{\percent} et
+\qty{20}{\percent}. Le pourcentage associé à chaque niveau est E:
+\qty{100}{\percent}, S: \qty{75}{\percent}, R: \qty{40}{\percent}, F:
+\qty{0}{\percent}. Par exemple, une personne étudiante qui aurait EESS aura une
+note de \qty{87.5}{\percent}. Une personne étudiante avec une évaluation SRRF
+aura une note de \qty{39}{\percent}.
+
+\nobibliography{../elecmag}
+\bibliographystyle{plainnat}
+
+\end{document}
