@@ -1,0 +1,72 @@
+\documentclass[nofonts]{tufte-handout}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage{booktabs}
+\usepackage[locale=FR]{siunitx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\usepackage{fontspec}
+\usepackage{ifluatex}
+\setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
+\setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
+\setmonofont[Renderer=Basic]{TeX Gyre Cursor}
+\ifluatex
+  \newcommand{\textls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
+
+\sisetup{
+  mode=text,
+  reset-text-family=false,
+  reset-text-series=false,
+  per-mode=symbol,
+}
+
+\newcommand{\F}{\boldsymbol{\vec{F}}}
+\newcommand{\vv}{\boldsymbol{\vec{v}}}
+\newcommand{\va}{\boldsymbol{\vec{a}}}
+
+\newif\ifsolution
+%\solutiontrue  % Montrer les solutions dans le pdf
+\solutionfalse  % Cacher les solutions
+
+
+\title{Exemple de problème intégrateur -- Charge électrique}
+\author{Loïc Séguin-Charbonneau}
+\date{203-NYB-05, Automne 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{marginfigure}[10\baselineskip]
+  \begin{tikzpicture}
+    \draw[ultra thick] (0, 0) -- (0, 4) -- (3, 4);
+    \draw[ultra thick] (0, 2) -- (0.6, 2);
+    \fill (0.6, 2) circle (4pt);
+    \fill (1.32, 2) circle (4pt);
+    \draw (0.6, 4) -- ++(-70:2.2);
+  \end{tikzpicture}
+\end{marginfigure}
+
+On considère deux balles métalliques identiques de \qty{300}{g}. Une des balles
+est initialement neutre et l'autre porte une charge $q$. Les deux balles sont
+mises en contact, puis on en place une sur un support fixé au mur et l'autre
+suspendue à une corde attachée au plafond. On positionne les balles tel
+qu'illustré ci-contre. La corde a une longueur de \qty{20}{cm} et forme un
+angle de \qty{20}{\degree} avec la verticale lorsque le système est à l'équilibre.
+
+Quelle est la charge $q$?
+
+\end{document}
+
