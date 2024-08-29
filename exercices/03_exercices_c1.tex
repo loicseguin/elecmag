@@ -1,0 +1,132 @@
+\documentclass[nofonts]{tufte-handout}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage{booktabs}
+\usepackage[locale=FR]{siunitx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{mhchem}
+
+\usepackage{fontspec}
+\usepackage{ifluatex}
+\setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
+\setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
+\setmonofont[Renderer=Basic]{TeX Gyre Cursor}
+\ifluatex
+  \newcommand{\textls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
+
+\sisetup{
+  mode=text,
+  reset-text-family=false,
+  reset-text-series=false,
+  per-mode=symbol,
+}
+
+\newcommand{\F}{\boldsymbol{\vec{F}}}
+\newcommand{\vv}{\boldsymbol{\vec{v}}}
+\newcommand{\va}{\boldsymbol{\vec{a}}}
+
+\newif\ifsolution
+%\solutiontrue  % Montrer les solutions dans le pdf
+\solutionfalse  % Cacher les solutions
+
+
+\title{Exercices chapitre 1 -- Charge électrique}
+\author{Loïc Séguin-Charbonneau}
+\date{203-NYB-05, Automne 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Échauffement}
+
+\subsection{Un peigne chargé}
+
+\marginnote{Chapitre 1, exercice 1.1.3 dans \citet{seguin_em_2010}}
+Après avoir frotté un peigne dans ses cheveux afin de le charger, Béatrice
+l'approche de petits morceaux de papier. Ces derniers sont d'abord attirés par
+le peigne, mais dès qu'ils le touchent, ils sont repoussés. Expliquez pourquoi.
+
+\subsection{Nouvelle particule}
+
+\marginnote{Chapitre 1, Q1 dans \citet{benson_em_2024}}
+Un journal rapporte que l'on vient de découvrir une nouvelle particule
+élémentaire de charge \SI{9e-19}{\coulomb}. Quelle est votre réaction?
+
+
+\subsection{Particules alpha}
+
+À quelle distance l'une de l'autre doivent se trouver deux particules alpha\sidenote{Une
+particule alpha est un noyau de \ce{^4_2He}.} pour
+que la force entre elles soit d'une grandeur de \qty{10}{\newton}?
+
+
+\section{Série principale}
+
+\subsection{Symétrie}
+
+Deux charges de \qty{4.2}{\micro\coulomb} et \qty{-4.2}{\micro\coulomb} sont
+fixées à une distance de \qty{100}{\micro\meter} l'une de l'autre. On place une
+troisième charge de \qty{-7}{\micro\coulomb} à une distance de
+\qty{50}{\micro\meter} au-dessus du point milieu entre les deux premières
+charges (voir figure ci-contre).
+\begin{marginfigure}
+  \begin{tikzpicture}
+    \fill (-2, 0) circle (4pt) node[below, yshift=-4] {\qty{4.2}{\micro\coulomb}};
+    \fill (2, 0) circle (4pt) node[below, yshift=-4] {\qty{-4.2}{\micro\coulomb}};
+    \fill (0, 1) circle (4pt) node[above, yshift=4] {\qty{-7}{\micro\coulomb}};
+    \draw[dashed] (-2, 0) -- (2, 0);
+    \draw[dashed] (0, 0) -- (0, 1);
+  \end{tikzpicture}
+\end{marginfigure}
+
+
+Quelle est la force sur la troisième charge?
+
+
+\subsection{Sphères en contact}
+
+On met en contact deux sphères métalliques identiques dont une est neutre et
+l'autre est chargée négativement.
+Puis, on les sépare. Si la force électrique sur une des sphères lorsqu'elles
+sont séparées de \qty{3}{\centi\meter} est de \qty{76}{\milli\newton}, quelle
+est le changement de masse qu'a subit la sphère neutre lors du contact.
+
+\section{Extra}
+
+\subsection{L'incroyable intensité de la force électrique}
+
+\marginnote{Chapitre 1, exercice 1.2.20 dans \citet{seguin_em_2010}}
+Dans un mauvais scénario de science-fiction, un savant fou prélève, pendant la
+nuit, $N$ électrons de la Terre et les dépose sur la Lune.
+\begin{enumerate}[label=\alph*)]
+  \item Quelle doit être
+    la valeur de $N$ pour que la force électrique entre la Terre et la Lune qui
+    résulte de cet exploit soit égale à la force gravitationnelle qu'elles exercent
+    l'une sur l'autre? (Les masses de la Terre et de la Lune sont respectivement de
+    \qty{5.98e24}{kg} et de \qty{7.35e22}{kg}).
+  \item Quelle est la masse totale de ces
+    $N$ électrons?
+\end{enumerate}
+
+
+
+
+\bibliography{../elecmag}
+\bibliographystyle{plainnat}
+
+\end{document}
+
+
