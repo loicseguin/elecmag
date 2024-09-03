@@ -1,0 +1,181 @@
+\documentclass[nofonts]{tufte-handout}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\usepackage{booktabs}
+\usepackage[locale=FR]{siunitx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\usepackage{fontspec}
+\usepackage{ifluatex}
+\setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
+\setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
+\setmonofont[Renderer=Basic]{TeX Gyre Cursor}
+\ifluatex
+  \newcommand{\textls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
+
+\sisetup{
+  mode=text,
+  reset-text-family=false,
+  reset-text-series=false,
+  per-mode=symbol,
+  uncertainty-mode=separate,
+}
+
+\newcommand{\F}{\boldsymbol{\vec{F}}}
+\newcommand{\vv}{\boldsymbol{\vec{v}}}
+\newcommand{\va}{\boldsymbol{\vec{a}}}
+
+\newif\ifsolution
+%\solutiontrue  % Montrer les solutions dans le pdf
+\solutionfalse  % Cacher les solutions
+
+
+\title{Mini-guide méthodologique}
+\author{Loïc Séguin-Charbonneau}
+\date{203-NYB-05, Automne 2024}
+
+\begin{document}
+
+\maketitle
+
+Ce mini-guide est un aide mémoire très condensé, pas un ouvrage de référence
+complet. Il existe de nombreuses références qui devraient être
+utilisées pour avoir des explications détaillées\cite{laflamme_2018,boisclair_page_2014}.
+
+\section{Règles d'écriture du résultat d'un mesurage}
+
+Lorsqu'on écrit un résultat de mesurage, que ce soit un résultat de mesurage
+obtenu directement avec un instrument de mesure ou obtenu indirectement à
+partir de calculs, on écrit la valeur mesurée, l'incertitude et l'unité en
+respectant les règles suivantes:
+\begin{enumerate}
+  \item l'incertitude s'écrit avec un ou deux chiffres significatifs;
+  \item le nombre de positions décimales de la valeur mesurée est le même que
+    celui de l'incertitude;
+  \item la valeur mesurée est suivie du signe $\pm$, puis de l'incertitude, le
+    tout entre parenthèses et suivi de l'unité;
+  \item lorsque nécessaire, on utilise la notation scientifique en prenant soin
+    d'utiliser la même puissance de 10 pour la valeur mesurée et l'incertitude.
+\end{enumerate}
+
+\begin{table}
+  \begin{tabular}{lll}
+    \toprule
+    Exemple correct    & Exemple incorrect  &  Règle violée  \\
+    \midrule
+    \qty{23.4123(18)}{\milli\ampere}  &  \qty{23.41231(187)}{\milli\ampere}  &  1  \\
+    \qty{123.7(8)}{\micro\farad}  &  $\left(\num{123.7} \pm \num{0.08}\right)\unit{\micro\farad}$  &  2  \\
+    \qty{8.79(3)}{\volt}  &  $\num{8.79} \pm \num{0.03} \unit{\volt}$  &  3  \\
+    \qty{4.284(2)e-5}{\meter}  &  $\left(\num{4.284e-5} \pm
+    \num{2e-8}\right)\unit{\meter}$  &  4\\
+    \bottomrule
+  \end{tabular}
+  \caption{Exemples d'utilisation des règles d'écriture pour les résultats de mesurage.}
+\end{table}
+
+
+
+\section{Évaluation et propagation des incertitudes}
+
+Lorsqu'on effectue un mesurage, il est impossible de connaître exactement la
+valeur du mesurage. Il faut évaluer l'incertitude en additionnant
+l'incertitude instrumentale et l'incertitude liée au contexte.
+L'incertitude instrumentale peut être déterminée à partir de règles empiriques
+(par exemple, prendre la moitié de la plus petite division pour une lecture sur
+un instrument graduée) ou être fournie par le fabricant (par exemple, le
+fabricant d'un multimètre numérique donne un tableau détaillé pour le calcul des
+incertitudes instrumentales).
+
+On évalue les incertitudes liées au contexte en tenant compte de la méthode de
+mesure. Lorsqu'il fait cette évaluation, l'expérimentateur doit être confiant
+que la valeur du mesurande se situe dans l'intervalle définit par l'incertitude.
+Par exemple, pour un instrument à affichage numérique, si la valeur sur
+l'affichage fluctue, on peut attribuer une incertitude liée au contexte de la
+moitié de l'écart entre les valeurs extrêmes.
+
+Dans des cas simples, on peut calculer l'incertitude sur un résultat de mesurage
+composé en utilisant les règles résumées dans le
+tableau~\ref{tab:regles_simples}. Ces règles simples surestiment généralement
+l'incertitude composée, mais elles donnent le bon ordre de grandeur.
+
+\begin{table}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{llll}
+    \toprule
+    Opération   & &  Valeur &  Incertitude  \\
+    \midrule
+    Somme  &  $R = A + B$
+      &  $\tilde{R} = \tilde{A} + \tilde{B}$
+      & $\Delta R = \Delta A + \Delta B$ \\
+    Différence  &  $R = A - B$
+      &  $\tilde{R} = \tilde{A} - \tilde{B}$
+      & $\Delta R = \Delta A + \Delta B$ \\
+    Produit  &   $R = A \times B$
+      &  $\tilde{R} = \tilde{A} \times \tilde{B}$
+      & $\Delta R = \left|\tilde{R}\right| \left(
+          \frac{\Delta A}{\left|\tilde{A}\right|} + \frac{\Delta B}{\left|\tilde{B}\right|}
+        \right)$ \\
+    Quotient  &  $R = A / B$
+      &  $\tilde{R} = \tilde{A} / \tilde{B}$
+      & $\Delta R = \left|\tilde{R}\right| \left(
+          \frac{\Delta A}{\left|\tilde{A}\right|} + \frac{\Delta B}{\left|\tilde{B}\right|}
+        \right)$ \\
+    Exposant  &  $R = A^n$
+      &  $\tilde{R} = \tilde{A}^n$
+      & $\Delta R = \left|\tilde{R}\right| \left(\left|n\right|\frac{\Delta A}{\left|\tilde{A}\right|}\right)$ \\
+      \bottomrule
+  \end{tabular}
+  \caption{Règles simples de calcul d'incertitude pour des variables
+  indépendantes $A = \tilde{A} \pm \Delta A$ et $B = \tilde{B} \pm \Delta B$.}
+  \label{tab:regles_simples}
+\end{table}
+
+
+\section{Présentation des tableaux}
+
+Un tableau doit présenter les données de façon claire, concise et complète. Un
+bon tableau maximise la quantité d'information fournie en minimisant l'encre
+utilisée. Les colonnes doivent être clairement identifiées, les unités et les
+incertitudes doivent être présentes, les données doivent être écrites en
+respectant les règles d'écriture. La légende accompagnant le tableau doit
+décrire son contenu suffisamment clairement pour qu'un lecteur comprenne la
+nature des données qui y sont présentées. Les tableaux doivent être numérotés
+pour pouvoir y faire facilement référence dans le texte.
+
+
+\section{Présentation des graphiques}
+
+Un graphique doit présenter les données de façon claire, concise et complète. Un
+bon graphique maximise la quantité d'information fournie en minimisant l'encre
+utilisée. Les axes doivent être clairement identifiés, les unités et les
+incertitudes doivent être présentes. La légende accompagnant le graphique doit
+décrire son contenu suffisamment clairement pour qu'un lecteur comprenne la
+nature des données qui y sont présentées et la relation qu'on tente de mettre en
+évidence. Les graphiques doivent être numérotés pour pouvoir y faire facilement
+référence dans le texte.
+
+
+\section{Cahier de laboratoire}
+\section{Vérification d'un modèle}
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{../elecmag}
+
+\end{document}
+
+
