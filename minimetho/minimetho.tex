@@ -1,29 +1,41 @@
-\documentclass[nofonts]{tufte-handout}
+\documentclass[letterpaper, DIV=11]{scrartcl}
 
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{../elecmag.bib}
+
+\usepackage{fontspec}
+\setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
+\setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
+\setmonofont[Renderer=Basic]{TeX Gyre Cursor}
+
+\setkomafont{title}{
+  \normalfont
+  \itshape
+  \rmfamily
+}
+\addtokomafont{author}{
+  \itshape
+}
+\addtokomafont{date}{
+  \itshape
+}
+\setkomafont{section}{
+  \normalfont
+  \itshape
+  \rmfamily
+  \Large
+}
+
 \usepackage{booktabs}
-\usepackage[locale=FR]{siunitx}
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{amsmath}
-
-\usepackage{fontspec}
-\usepackage{ifluatex}
-\setmainfont[Renderer=Basic, Numbers=OldStyle, Scale = 1.0]{TeX Gyre Pagella}
-\setsansfont[Renderer=Basic, Scale=0.90]{TeX Gyre Heros}
-\setmonofont[Renderer=Basic]{TeX Gyre Cursor}
-\ifluatex
-  \newcommand{\textls}[2][5]{%
-    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
-  }
-  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
-  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
-  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
-  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
-  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
-\fi
+\usepackage[locale=FR]{siunitx}
+\usepackage{hyperref}
 
 \sisetup{
   mode=text,
@@ -37,24 +49,24 @@
 \newcommand{\vv}{\boldsymbol{\vec{v}}}
 \newcommand{\va}{\boldsymbol{\vec{a}}}
 
-\newif\ifsolution
-%\solutiontrue  % Montrer les solutions dans le pdf
-\solutionfalse  % Cacher les solutions
 
-
-\title{Mini-guide méthodologique}
+\title{Miniguide méthodologique}
 \author{Loïc Séguin-Charbonneau}
-\date{203-NYB-05, Automne 2024}
+\date{}
 
 \begin{document}
 
 \maketitle
 
-Ce mini-guide est un aide mémoire très condensé, pas un ouvrage de référence
-complet. Il existe de nombreuses références qui devraient être
-utilisées pour avoir des explications détaillées\cite{laflamme_2018,boisclair_page_2014}.
+Ce miniguide est un aide mémoire très condensé. Si vous avez besoin
+d'explications détaillées ou de plus de détails sur les bonnes pratiques
+méthodologiques, vous pouvez consulter une des nombreuses références sur le
+sujet (par exemple,
+\cite{boisclair_page_2014,debellefeuille_ite,jcgm_2008,laflamme_2018}). Pour des
+définitions précises de tous les termes de métrologie, vous pouvez consulter le
+Vocabulaire international de métrologie \cite{vim}.
 
-\section{Règles d'écriture du résultat d'un mesurage}
+\section*{Règles d'écriture du résultat d'un mesurage}
 
 Lorsqu'on écrit un résultat de mesurage, que ce soit un résultat de mesurage
 obtenu directement avec un instrument de mesure ou obtenu indirectement à
@@ -71,6 +83,7 @@ respectant les règles suivantes:
 \end{enumerate}
 
 \begin{table}
+  \centering
   \begin{tabular}{lll}
     \toprule
     Exemple correct    & Exemple incorrect  &  Règle violée  \\
@@ -87,10 +100,10 @@ respectant les règles suivantes:
 
 
 
-\section{Évaluation et propagation des incertitudes}
+\section*{Évaluation et propagation des incertitudes}
 
 Lorsqu'on effectue un mesurage, il est impossible de connaître exactement la
-valeur du mesurage. Il faut évaluer l'incertitude en additionnant
+valeur du mesurage \cite{jcgm_2008}. Il faut évaluer l'incertitude en additionnant
 l'incertitude instrumentale et l'incertitude liée au contexte.
 L'incertitude instrumentale peut être déterminée à partir de règles empiriques
 (par exemple, prendre la moitié de la plus petite division pour une lecture sur
@@ -111,7 +124,8 @@ tableau~\ref{tab:regles_simples}. Ces règles simples surestiment généralement
 l'incertitude composée, mais elles donnent le bon ordre de grandeur.
 
 \begin{table}
-  \renewcommand{\arraystretch}{1.4}
+  \renewcommand{\arraystretch}{1.5}
+  \centering
   \begin{tabular}{llll}
     \toprule
     Opération   & &  Valeur &  Incertitude  \\
@@ -125,16 +139,18 @@ l'incertitude composée, mais elles donnent le bon ordre de grandeur.
     Produit  &   $R = A \times B$
       &  $\tilde{R} = \tilde{A} \times \tilde{B}$
       & $\Delta R = \left|\tilde{R}\right| \left(
-          \frac{\Delta A}{\left|\tilde{A}\right|} + \frac{\Delta B}{\left|\tilde{B}\right|}
+          \displaystyle{\frac{\Delta A}{\left|\tilde{A}\right|}} + \displaystyle{\frac{\Delta
+          B}{\left|\tilde{B}\right|}}
         \right)$ \\
     Quotient  &  $R = A / B$
       &  $\tilde{R} = \tilde{A} / \tilde{B}$
       & $\Delta R = \left|\tilde{R}\right| \left(
-          \frac{\Delta A}{\left|\tilde{A}\right|} + \frac{\Delta B}{\left|\tilde{B}\right|}
+          \displaystyle{\frac{\Delta A}{\left|\tilde{A}\right|}} + \displaystyle{\frac{\Delta B}{\left|\tilde{B}\right|}}
         \right)$ \\
     Exposant  &  $R = A^n$
       &  $\tilde{R} = \tilde{A}^n$
-      & $\Delta R = \left|\tilde{R}\right| \left(\left|n\right|\frac{\Delta A}{\left|\tilde{A}\right|}\right)$ \\
+      & $\Delta R = \left|\tilde{R}\right|
+      \left(\left|n\right|\displaystyle{\frac{\Delta A}{\left|\tilde{A}\right|}}\right)$ \\
       \bottomrule
   \end{tabular}
   \caption{Règles simples de calcul d'incertitude pour des variables
@@ -143,7 +159,7 @@ l'incertitude composée, mais elles donnent le bon ordre de grandeur.
 \end{table}
 
 
-\section{Présentation des tableaux}
+\section*{Présentation des tableaux}
 
 Un tableau doit présenter les données de façon claire, concise et complète. Un
 bon tableau maximise la quantité d'information fournie en minimisant l'encre
@@ -154,27 +170,100 @@ décrire son contenu suffisamment clairement pour qu'un lecteur comprenne la
 nature des données qui y sont présentées. Les tableaux doivent être numérotés
 pour pouvoir y faire facilement référence dans le texte.
 
+Par exemple, considérons un laboratoire où on aurait mesuré la grandeur du
+champ électrique produit par une charge ponctuelle à différentes distances de
+la charge. L'expression théorique du champ électrique est
+\begin{equation}
+  \vec{E} = \frac{kq}{r^2}\vec{u}_r
+  \label{eq:champ_ponctuel}
+\end{equation}
+Le tableau \ref{tab:data_er2} montre les différentes mesures obtenues lors de
+cette expérience.
 
-\section{Présentation des graphiques}
+\begin{table}
+  \renewcommand{\arraystretch}{1.5}
+  \centering
+  \begin{tabular}{SS}
+    \toprule
+    {$r$ (\unit{\meter})} &  {$E$ (\unit{\kilo\newton\per\coulomb})}  \\
+    \midrule
+        0.201(8)   &          9.82(3)  \\
+        0.233(9)   &          7.04(3)  \\
+        0.262(9)   &          5.91(3)  \\
+        0.29(1)  &          4.72(3)  \\
+        0.32(1)  &          3.92(3)  \\
+        0.35(1)   &          3.59(3)  \\
+        0.38(1)  &          2.62(3)  \\
+        0.41(1)  &          2.60(3)  \\
+        0.44(1)  &          2.09(3)  \\
+        0.47(1)  &          2.27(3)  \\
+    \bottomrule
+  \end{tabular}
+  \caption{Grandeur du champ électrique produit par une particule ponctuelle
+  chargée, $E$, à différentes distances de la particule, $r$.}
+  \label{tab:data_er2}
+\end{table}
+
+
+\section*{Présentation des graphiques}
 
 Un graphique doit présenter les données de façon claire, concise et complète. Un
 bon graphique maximise la quantité d'information fournie en minimisant l'encre
 utilisée. Les axes doivent être clairement identifiés, les unités et les
-incertitudes doivent être présentes. La légende accompagnant le graphique doit
-décrire son contenu suffisamment clairement pour qu'un lecteur comprenne la
-nature des données qui y sont présentées et la relation qu'on tente de mettre en
-évidence. Les graphiques doivent être numérotés pour pouvoir y faire facilement
-référence dans le texte.
+incertitudes doivent être présentes. Les droites extrêmes doivent être
+présentes. La légende accompagnant le graphique doit décrire son contenu
+suffisamment clairement pour qu'un lecteur comprenne la nature des données qui y
+sont présentées et la relation qu'on tente de mettre en évidence. Les graphiques
+doivent être numérotés pour pouvoir y faire facilement référence dans le texte.
+
+Si on reprend l'exemple de la section précédente, la figure \ref{fig:bon_er2},
+montre la relation entre la grandeur du champ électrique et l'inverse du carré
+de la distance. Théoriquement, cette relation devrait être linéaire et c'est
+bien ce que semble montrer le graphique.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{exemple_bon_graphique_er2.pdf}
+  \caption{Grandeur du champ électrique d'une particule ponctuelle chargée. La
+  relation linéaire entre la grandeur du champ électrique et l'inverse du carré
+  de la distance est cohérente avec l'expression théorique du champ électrique
+  produit par une charge ponctuelle (équation \ref{eq:champ_ponctuel}).}
+  \label{fig:bon_er2}
+\end{figure}
 
 
-\section{Cahier de laboratoire}
-\section{Vérification d'un modèle}
+\section*{Vérification d'un modèle}
+
+Vérifier un modèle implique de s'assurer que les mesures concordent avec les
+prédictions du modèle. Plus spécifiquement, on vérifie si
+\begin{itemize}
+  \item la distribution des points est cohérente avec ce que prédit le
+    modèle (ils devraient être répartis aléatoirement autour de la courbe de
+    régression et on doit avoir un maximum de 20\% de points singuliers);
+  \item les paramètres du modèle obtenus expérimentalement sont cohérents
+    avec les paramètres théoriques.
+\end{itemize}
+Très souvent, dans le cours, le modèle sera linéaire ou il aura été linéarisé.
+Par exemple, en analysant la relation entre $E$ et $1/r^2$ plutôt que celle
+entre $E$ et $r$, on a linéarisé l'expression de la grandeur du champ électrique
+produit par une charge ponctuelle. Dans ce cas, les points devraient être
+distribués le long d'une droite, et les paramètres de la droite (pente et
+ordonnée à l'origine) devraient avoir des valeurs de $kq$ et 0, respectivement.
+
+\section*{Cahier de laboratoire}
+
+La tenue d'un cahier de laboratoire fait partie des bonnes pratiques en
+recherche. Le cahier de laboratoire devrait être clairement identifié (nom du
+propriétaire et sujet). Pour chaque expérience, le cahier de laboratoire devrait
+contenir le titre de l'expérience et la date à laquelle l'expérience a été
+réalisée. On met ensuite le travail préalable au laboratoire, puis les données
+et observations qualitatives obtenues lors de l'expérience. Les schémas de
+circuits et certains calculs simples devraient aussi se retrouver dans le
+cahier de laboratoire.
 
 
+\printbibliography
 
-
-\bibliographystyle{plainnat}
-\bibliography{../elecmag}
 
 \end{document}
 
